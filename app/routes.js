@@ -1,7 +1,7 @@
 module.exports = function(app, db) {
   app.get('/', (req, res) => {
     //display whats from the database into the DOM
-    db.collection('vidyagames').find().toArray((err, result) => {
+    db.collection('vidyagames').find().sort({voteUp: -1}).toArray((err, result) => {
       if (err) return console.log(err)
       //render both ejs file and whats in the database
       res.render('index.ejs', {vidyagames: result})
@@ -34,7 +34,7 @@ module.exports = function(app, db) {
     db.collection('vidyagames')
     .findOneAndUpdate({title: req.body.title}, {
       $set: {
-        voteDown:req.body.voteDown + 1
+        voteUp:req.body.voteUp - 1
       }
     }, {
       sort: {_id: -1},

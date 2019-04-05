@@ -27,13 +27,13 @@ Array.from(voteUp).forEach(function(element) {
 Array.from(voteDown).forEach(function(el) {
       el.addEventListener('click', function(){
         const title = this.parentNode.parentNode.childNodes[1].innerText
-        const voteDown = parseFloat(this.parentNode.parentNode.childNodes[7].innerText)
+        const voteUp = parseFloat(this.parentNode.parentNode.childNodes[3].innerText)
         fetch('voteDown', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
             'title': title,
-            'voteDown':voteDown
+            'voteUp': voteUp
           })
         })
         .then(response => {
